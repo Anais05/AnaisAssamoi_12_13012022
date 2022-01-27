@@ -5,7 +5,7 @@ export default class User {
   keyData;
 
   constructor(data) {
-    this.userId = data.userId;
+    this.id = data.id;
     this.userInfos = data.userInfos;
     this.score = data.score;
     this.keyData = data.keyData;

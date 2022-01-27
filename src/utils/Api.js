@@ -5,7 +5,7 @@ import Activity from "../models/Activity";
 
 export default class getData {
   constructor() {
-    this.baseUrl = "http://localhost:3001";
+    this.baseUrl = "http://localhost:3000";
   }
 
   async getUserInfo(userId) {
@@ -13,9 +13,9 @@ export default class getData {
       let data = {};
       await fetch(`${this.baseUrl}/user/${userId}`)
       .then(function (response) {
-        data = response.json;
+        data = response;
       });
-      return new User(data.data);
+      return new User(data);
     } catch (error) {
       console.error(error);
     }
@@ -26,11 +26,11 @@ export default class getData {
       let data = {};
       await fetch(`${this.baseUrl}/user/${userId}/activity`)
       .then(function (response) {
-        data = response.json;
+        data = response;
       });
-      return new Activity(data.data);
+      return new Activity(data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -39,11 +39,11 @@ export default class getData {
       let data = {};
       await fetch(`${this.baseUrl}/user/${userId}/average-sessions`)
       .then(function (response) {
-        data = response.json;
+        data = response;
       });
-      return new Session(data.data);
+      return new Session(data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
@@ -52,11 +52,11 @@ export default class getData {
      let data = {};
       await fetch(`${this.baseUrl}/user/${userId}/performance`)
       .then(function (response) {
-        data = response.json;
+        data = response;
       });
-      return new Performance(data.data);
+      return new Performance(data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 }
