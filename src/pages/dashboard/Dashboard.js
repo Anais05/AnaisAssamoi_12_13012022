@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Api from "../../utils/Api.js";
-
+import Score from '../../components/score/Score.js';
 
 function Dashboard() {
   let userId = useParams().id;
@@ -29,9 +29,9 @@ function Dashboard() {
   console.log(userAverageSession);
   console.log(userPerfomance);
 
-
   return (
     <div>
+      <Score />
     </div>
   )
 }
