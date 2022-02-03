@@ -13,5 +13,5 @@ export default function Greeting({ userName }) {
 }
 
 Greeting.propTypes = {
-  userName: PropTypes.string.isRequired, 
+  userName: PropTypes.string, 
 }

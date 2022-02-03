@@ -20,5 +20,5 @@ DashboardAside.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
 };

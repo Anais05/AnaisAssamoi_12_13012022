@@ -10,9 +10,8 @@ export default class getData {
 
   async getUserInfo(userId) {
     try {
-      let data = {};
       const resp = await fetch(`${this.baseUrl}/user/${userId}`)
-      data = await resp.json()
+      const data = await resp.json()
       return new User(data.data);
     } catch (error) {
       console.error(error);
@@ -21,9 +20,8 @@ export default class getData {
 
   async getActivity(userId) {
     try {
-      let data = {};
       const resp = await fetch(`${this.baseUrl}/user/${userId}/activity`)
-      data = await resp.json()
+      const data = await resp.json()
       return new Activity(data.data);
     } catch (error) {
       console.log(error);
@@ -32,9 +30,8 @@ export default class getData {
 
   async getSession(userId) {
     try {
-      let data = {};
       const resp = await fetch(`${this.baseUrl}/user/${userId}/average-sessions`)
-      data = await resp.json()
+      const data = await resp.json()
       return new Session(data.data);
     } catch (error) {
       console.log(error);
@@ -43,9 +40,8 @@ export default class getData {
 
   async getPerformance(userId) {
     try {
-      let data = {};
       const resp = await fetch(`${this.baseUrl}/user/${userId}/performance`)
-      data = await resp.json()
+      const data = await resp.json()
       return new Performance(data.data);
     } catch (error) {
       console.log(error);
