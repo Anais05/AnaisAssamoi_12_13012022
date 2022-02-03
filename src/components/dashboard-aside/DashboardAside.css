@@ -1,0 +1,25 @@
+.count {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 40px;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  padding: 25px;
+}
+
+img {
+  height: 55px;
+}
+.count-text {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #282d30;
+}
+.count-text p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #74798c;
+  margin: unset;
+}

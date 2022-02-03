@@ -2,11 +2,17 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Api from "../../utils/Api.js";
+import "./Dashboard.css"
+import Greeting from '../../components/greeting/Greeting.js';
+import DashboardAside from '../../components/dashboard-aside/DashboardAside.js';
+import calories from '../../assets/calories.png'
+import protein from '../../assets/protein.png'
+import carbs from '../../assets/carbs.png'
+import fat from '../../assets/fat.png'
 import Score from '../../components/score/Score.js';
 
 function Dashboard() {
   let userId = useParams().id;
-  console.log(userId);
 
   const [user, updateUser] = useState({});
   const [userActivity, updateUserActivity] = useState({});
@@ -30,8 +36,36 @@ function Dashboard() {
   console.log(userPerfomance);
 
   return (
-    <div>
+    <div className="dashbord">
+      <Greeting userName={user?.userInfos?.firstName} />
       <Score />
+
+      <div className="dashboard-aside">
+          <DashboardAside
+                image={calories}
+                title="Calories"
+                value={user?.keyData?.calorieCount}
+                unit="kCal"
+              />
+              <DashboardAside
+                image={protein}
+                title="Protéines"
+                value={user?.keyData?.proteinCount}
+                unit="g"
+              />
+              <DashboardAside
+                image={carbs}
+                title="Gulicides"
+                value={user?.keyData?.carbohydrateCount}
+                unit="g"
+              />
+              <DashboardAside
+                image={fat}
+                title="Lipides"
+                value={user?.keyData?.lipidCount}
+                unit="g"
+              />
+        </div>
     </div>
   )
 }

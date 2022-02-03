@@ -1,0 +1,12 @@
+.greeting h1 {
+  font-size: 48px;
+  font-weight: 500;
+  margin-bottom: unset;
+}
+.greeting p {
+  font-size: 18px;
+}
+
+.firstname {
+  color: red;
+}

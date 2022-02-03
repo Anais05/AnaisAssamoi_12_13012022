@@ -1,0 +1,11 @@
+.dashbord {
+  width: 75%;
+  margin: auto;
+}
+
+.dashboard-aside {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-top: 80px;
+}

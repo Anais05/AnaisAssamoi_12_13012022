@@ -1,8 +1,8 @@
 .aside-nav {
   background-color: #020203;
-  width: 120px;
+  width: 6%;
   position: absolute;
-  height: calc(100% - 70px);
+  height: calc(150% - 70px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,8 +10,8 @@
 }
 
 .aside-icon {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   padding: 5px;
   background-color: white;
   margin: 10px;
