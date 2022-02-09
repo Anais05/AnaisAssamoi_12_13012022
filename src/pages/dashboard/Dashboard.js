@@ -15,57 +15,62 @@ function Dashboard() {
   let userId = useParams().id;
 
   const [user, updateUser] = useState({});
-  const [userActivity, updateUserActivity] = useState({});
-  const [userAverageSession, updateUserAverageSession] = useState({});
-  const [userPerfomance, updateUserPerfomance] = useState({});
+  // const [userActivity, updateUserActivity] = useState({});
+  // const [userAverageSession, updateUserAverageSession] = useState({});
+  // const [userPerfomance, updateUserPerfomance] = useState({});
 
   useEffect(getData, [userId]);
 
   function getData() {
     const api = new Api();
 
+    // api.getActivity(userId).then((data) => updateUserActivity(data));
+    // api.getSession(userId).then((data) => updateUserAverageSession(data));
+    // api.getPerformance(userId).then((data) => updateUserPerfomance(data));
     api.getUserInfo(userId).then((data) => updateUser(data));
-    api.getActivity(userId).then((data) => updateUserActivity(data));
-    api.getSession(userId).then((data) => updateUserAverageSession(data));
-    api.getPerformance(userId).then((data) => updateUserPerfomance(data));
   }
 
-  console.log(user);
-  console.log(userActivity);
-  console.log(userAverageSession);
-  console.log(userPerfomance);
+  console.log(user)
 
   return (
     <div className="dashbord">
       <Greeting userName={user?.userInfos?.firstName} />
-      <Score />
 
-      <div className="dashboard-aside">
-          <DashboardAside
-                image={calories}
-                title="Calories"
-                value={user?.keyData?.calorieCount}
-                unit="kCal"
-              />
-              <DashboardAside
-                image={protein}
-                title="Protéines"
-                value={user?.keyData?.proteinCount}
-                unit="g"
-              />
-              <DashboardAside
-                image={carbs}
-                title="Gulicides"
-                value={user?.keyData?.carbohydrateCount}
-                unit="g"
-              />
-              <DashboardAside
-                image={fat}
-                title="Lipides"
-                value={user?.keyData?.lipidCount}
-                unit="g"
-              />
+      <div className="container">
+      
+        <div className="dashboard-main">
+          {(user.score) &&
+            <Score score={user?.score} />
+          }
         </div>
+
+        <div className="dashboard-aside">
+            <DashboardAside
+                  image={calories}
+                  title="Calories"
+                  value={user?.keyData?.calorieCount}
+                  unit="kCal"
+                />
+                <DashboardAside
+                  image={protein}
+                  title="Protéines"
+                  value={user?.keyData?.proteinCount}
+                  unit="g"
+                />
+                <DashboardAside
+                  image={carbs}
+                  title="Gulicides"
+                  value={user?.keyData?.carbohydrateCount}
+                  unit="g"
+                />
+                <DashboardAside
+                  image={fat}
+                  title="Lipides"
+                  value={user?.keyData?.lipidCount}
+                  unit="g"
+                />
+        </div>
+      </div>
     </div>
   )
 }

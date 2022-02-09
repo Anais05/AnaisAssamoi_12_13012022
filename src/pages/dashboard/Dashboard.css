@@ -3,9 +3,14 @@
   margin: auto;
 }
 
+.container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+
 .dashboard-aside {
   display: flex;
   flex-direction: column;
   float: right;
-  margin-top: 80px;
 }
