@@ -1,23 +1,27 @@
 import * as d3 from 'd3';
 import React from "react";
 import PropTypes from "prop-types";
+import './Score.css'
 
 export default function Score({score}) {
   var scorePercent = score * 100;
   var total = 100;
   var progress = 0;
-  var width = 400;
-  var height = 400;
+  var width = 300;
+  var height = 300;
   var endAngle = Math.PI * -2;
-  var formatPercent = d3.format(".0%");
 
-  //setup SVG wrapper
-  var svg = d3.select(".score-chart").append("svg")
-    .attr("width", width)
-    .attr("height", height)
+  //setup svg wrapper
+  var chart = d3.select(".score-chart")
 
-  svg.selectAll(".score-chart").remove()
-  
+  chart.selectAll(".svg").remove();
+
+  //setup svg
+  var svg = chart.append("svg")
+  .attr("class", "svg")
+  .attr("width", width)
+  .attr("height", height)
+
   //Define the circle
   var circle = d3.arc()
   .startAngle(0)
@@ -25,16 +29,16 @@ export default function Score({score}) {
   .outerRadius(105)
   .cornerRadius(20);
 
-  // Add Group container
+  // Add group container
   var g = svg.append("g")
     .attr('transform','translate(' + width / 2 + "," + height / 2 + ')');
 
-  // //Setup track
+  //Setup track
   var track = g.append('g');
   track.append('path')
-    .attr('fill', 'white')
-    .attr('stroke-width', 3 + 'px')
-    .attr('d', circle.endAngle(endAngle));
+  .attr('fill', 'white')
+  .attr('stroke-width', 3 + 'px')
+  .attr('d', circle.endAngle(endAngle));
 
   //Add colour fill
   var value = track.append('path')
@@ -42,28 +46,32 @@ export default function Score({score}) {
   .attr('fill', 'red')
   .attr('stroke-width', 3 + 'px'); 
 
-  // // Add text 
+  // Add text 
   track.append("text")
-    .attr("text-anchor", "middle")
-    .attr("class", "percent-complete")
-    .text(scorePercent)
-    .style({
-        fill: d3.rgb('#282D30'),
-        'font-size': '26px',
-        'font-weight': 'bold'
-     });
+  .attr("text-anchor", "middle")
+  .attr("class", "percent-complete")
+  .text(scorePercent + '%')
+  .style('fill','#282D30')
+  .style('font-size', '26px')
+  .style('font-weight', 'bold');
 
-  track.append("text2")
+  track.append("text")
     .attr("text-anchor", "middle")
     .attr("class", "objectif-text")
     .attr("dy", "25px")
-    .text('de votre objectif')
-    .style({
-        fill: d3.rgb('#74798c'),
-        'font-size': '16px',
-        'font-weight': 'bold',
-        'margin-top': '15px'
-     });
+    .text('de votre')
+    .style('fill','#74798c')
+    .style('font-size', '16px')
+    .style('font-weight', 'bold');
+
+  track.append("text")
+  .attr("text-anchor", "middle")
+  .attr("class", "objectif-text")
+  .attr("dy", "50px")
+  .text('objectif')
+  .style('fill','#74798c')
+  .style('font-size', '16px')
+  .style('font-weight', 'bold');
 
   //Action
   var i = d3.interpolate( progress, scorePercent / total);
