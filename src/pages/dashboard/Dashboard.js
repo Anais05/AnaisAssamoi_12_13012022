@@ -10,12 +10,13 @@ import protein from '../../assets/protein.png'
 import carbs from '../../assets/carbs.png'
 import fat from '../../assets/fat.png'
 import Score from '../../components/score/Score.js';
+import BarsChart from '../../components/bars-chart/BarsChart.js';
 
 function Dashboard() {
   let userId = useParams().id;
 
   const [user, updateUser] = useState({});
-  // const [userActivity, updateUserActivity] = useState({});
+  const [userActivity, updateUserActivity] = useState({});
   // const [userAverageSession, updateUserAverageSession] = useState({});
   // const [userPerfomance, updateUserPerfomance] = useState({});
 
@@ -24,13 +25,11 @@ function Dashboard() {
   function getData() {
     const api = new Api();
 
-    // api.getActivity(userId).then((data) => updateUserActivity(data));
+    api.getUserInfo(userId).then((data) => updateUser(data));
+    api.getActivity(userId).then((data) => updateUserActivity(data));
     // api.getSession(userId).then((data) => updateUserAverageSession(data));
     // api.getPerformance(userId).then((data) => updateUserPerfomance(data));
-    api.getUserInfo(userId).then((data) => updateUser(data));
   }
-
-  console.log(user)
 
   return (
     <div className="dashbord">
@@ -39,8 +38,11 @@ function Dashboard() {
       <div className="container">
       
         <div className="dashboard-main">
+          {(userActivity.sessions) &&
+            <BarsChart activity={userActivity.sessions} />
+          }
           {(user.score) &&
-            <Score score={user?.score} />
+            <Score score={user.score} />
           }
         </div>
 
