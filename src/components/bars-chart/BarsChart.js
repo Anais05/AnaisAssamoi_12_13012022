@@ -12,12 +12,14 @@ export default function BarsChart({activity}) {
     }
   })
 
-  var margin = {top: 30, right: 30, bottom: 30, left: 50};
+  var margin = {top: 30, right: 30, bottom: 30, left: 10};
   var width = 560;
   var height = 250;
   var barPadding = .2;
+  var rx = 3;
+  var ry = 3; 
 
-  //setup svg wrapper
+  // setup svg wrapper
   var chart = d3.select('.bars-chart')
   
   chart.selectAll(".svg").remove();
@@ -58,8 +60,10 @@ export default function BarsChart({activity}) {
   .attr("class", "bars")
   .attr("transform", d => `translate(${x0(d.day)},0)`)
 
-
+  // Add bars info data
   var g2 =  g.append("g")
+  .attr("class", "bars-text")
+
   g2.append("rect")
   .attr("y", "50")
   .attr("x", "15")
@@ -69,7 +73,6 @@ export default function BarsChart({activity}) {
 
   g2.append("text")
   .text(d => d.kilogram + 'kg' )
-  .attr("class", "bars-text")
   .style('fill',"white")
   .style("font-size", "10px")
   .style("background-color", "red" )
@@ -78,40 +81,42 @@ export default function BarsChart({activity}) {
 
   g2.append("text")
   .text(d => d.calories + 'kcal')
-  .attr("class", "bars-tex")
   .style('fill',"white")
   .style("font-size", "10px")
   .attr("dy", "90px")
   .attr("dx", "20px")
 
-
-  /* Add kilogram bars */
+  // Add kilogram bars
   g.selectAll(".bar.kilogram")
   .data(d => [d])
   .enter()
-  .append("rect")
+  .append("path")
   .attr("class", "bar kilogram")
   .style("fill","#282D30")
-  .attr("x", d => x1('kilogram'))
-  .attr("y", d => y(d.kilogram))
-  .attr("width", 5)
-  .attr("height", d => {
-    return height - margin.top - margin.bottom - y(d.kilogram)
-  });
+  .attr("d", d => `
+    M${x1('kilogram')},${y(d.kilogram) + ry}
+    a${rx},${ry} 0 0 1 ${rx},${-ry}
+    h${5 - 2 * rx}
+    a${rx},${ry} 0 0 1 ${rx},${ry}
+    v${height  - margin.top - margin.bottom - y(d.kilogram) - ry}
+    h${-5}Z
+  `);
 
-  /* Add calories bars */
+  //  Add calories bars 
   g.selectAll(".bar.calories")
   .data(d => [d])
   .enter()
-  .append("rect")
+  .append("path")
   .attr("class", "bar calories")
   .style("fill","red")
-  .attr("x", d => x1('calories'))
-  .attr("y", d => y(d.calories))
-  .attr("width", 5)
-  .attr("height", d => {
-    return height - margin.top - margin.bottom - y(d.calories)
-  });
+  .attr("d", d => `
+    M${x1('calories')},${y(d.calories) + ry}
+    a${rx},${ry} 0 0 1 ${rx},${-ry}
+    h${5 - 2 * rx}
+    a${rx},${ry} 0 0 1 ${rx},${ry}
+    v${height  - margin.top - margin.bottom - y(d.calories) - ry}
+    h${-5}Z
+  `);
 
   // Add X Axis
   svg.append("g")
