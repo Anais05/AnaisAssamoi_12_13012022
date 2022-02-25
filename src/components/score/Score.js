@@ -1,7 +1,7 @@
-import * as d3 from 'd3';
+import * as d3 from "d3";
 import React from "react";
 import PropTypes from "prop-types";
-import './Score.css'
+import "./Score.css"
 
 export default function Score({score}) {
   var scorePercent = score * 100;
@@ -31,47 +31,47 @@ export default function Score({score}) {
 
   // Add group container
   var g = svg.append("g")
-    .attr('transform','translate(' + width / 2 + "," + height / 2 + ')');
+    .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
 
   //Setup track
-  var track = g.append('g');
-  track.append('path')
-  .attr('fill', 'white')
-  .attr('stroke-width', 3 + 'px')
-  .attr('d', circle.endAngle(endAngle));
+  var track = g.append("g");
+  track.append("path")
+  .attr("fill", "white")
+  .attr("stroke-width", 3 + "px")
+  .attr("d", circle.endAngle(endAngle));
 
   //Add colour fill
-  var value = track.append('path')
-  .attr('class', 'radial-path')
-  .attr('fill', 'red')
-  .attr('stroke-width', 3 + 'px'); 
+  var value = track.append("path")
+  .attr("class", "radial-path")
+  .attr("fill", "red")
+  .attr("stroke-width", 3 + "px"); 
 
   // Add text 
   track.append("text")
   .attr("text-anchor", "middle")
   .attr("class", "percent-complete")
-  .text(scorePercent + '%')
-  .style('fill','#282D30')
-  .style('font-size', '26px')
-  .style('font-weight', 'bold');
+  .text(scorePercent + "%")
+  .style("fill","#282D30")
+  .style("font-size", "26px")
+  .style("font-weight", "bold");
 
   track.append("text")
-    .attr("text-anchor", "middle")
-    .attr("class", "objectif-text")
-    .attr("dy", "25px")
-    .text('de votre')
-    .style('fill','#74798c')
-    .style('font-size', '16px')
-    .style('font-weight', 'bold');
+  .attr("text-anchor", "middle")
+  .attr("class", "objectif-text")
+  .attr("dy", "25px")
+  .text("de votre")
+  .style("fill","#74798c")
+  .style("font-size", "16px")
+  .style("font-weight", "bold");
 
   track.append("text")
   .attr("text-anchor", "middle")
   .attr("class", "objectif-text")
   .attr("dy", "50px")
-  .text('objectif')
-  .style('fill','#74798c')
-  .style('font-size', '16px')
-  .style('font-weight', 'bold');
+  .text("objectif")
+  .style("fill","#74798c")
+  .style("font-size", "16px")
+  .style("font-weight", "bold");
 
   //Action
   var i = d3.interpolate( progress, scorePercent / total);

@@ -10,3 +10,9 @@
 .y-axis {
   color: transparent;
 }
+
+.tick line {
+  color: #9b9eac;
+  opacity: 0.5;
+  stroke-dasharray: 3, 3;
+}

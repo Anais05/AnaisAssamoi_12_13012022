@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import Api from "../../utils/Api.js";
-import "./Dashboard.css"
+import './Dashboard.css'
 import Greeting from '../../components/greeting/Greeting.js';
 import DashboardAside from '../../components/dashboard-aside/DashboardAside.js';
 import calories from '../../assets/calories.png'
