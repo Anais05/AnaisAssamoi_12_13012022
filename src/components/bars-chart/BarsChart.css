@@ -2,3 +2,11 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+.x-axis {
+  color: #9b9eac;
+}
+
+.y-axis {
+  color: transparent;
+}
