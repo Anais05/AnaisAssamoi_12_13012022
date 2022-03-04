@@ -13,7 +13,7 @@ export default function BarsChart({activity}) {
   })
 
   var margin = {top: 30, right: 40, bottom: 30, left: 10};
-  var width = 600;
+  var width = 700;
   var height = 250;
   var barPadding = .2;
   var rx = 3;
@@ -21,7 +21,8 @@ export default function BarsChart({activity}) {
 
   // setup svg wrapper
   var chart = d3.select(".bars-chart")
-  
+
+  // Clean duplicate chart
   chart.selectAll(".svg").remove();
 
   // add group container
@@ -47,13 +48,39 @@ export default function BarsChart({activity}) {
 
   var yAxis = d3.axisRight(y)
   .tickSize(0)
-  .tickSizeInner(-width + margin.left + margin.right)
-  .ticks(2);
+  .ticks(2)
+  .tickSizeInner(-width + margin.left + margin.right);
 
   // mapping axis with data
   x0.domain(newData.map(d=> d.day));
-  x1.domain(["kilogram", "calories"]).range([25 , 0]);
+  x1.domain(["kilogram", "calories"]).range([20 , 0]);
   y.domain([0, d3.max(newData, d => d.kilogram > d.calories ? d.kilogram : d.calories)]);
+
+  // add X Axis
+  svg.append("g")
+  .attr("class", "x-axis")
+  .attr("transform", "translate(0, "+( height - margin.top - margin.bottom) + ")")
+  .call(xAxis)
+
+  svg.select(".x-axis").selectAll("text")
+  .style("fill","#9B9EAC")
+  .style("font-size", "12px")
+  .style("font-weight", "bold")
+  .attr("dy", "20px")
+  .attr("dx", "-30px");
+  
+  // add Y Axis
+  svg.append("g")
+  .attr("class", "y-axis")
+  .attr("transform", "translate("+ ( width - margin.left - margin.right)+ ",0)")
+  .call(yAxis);
+
+  svg.select(".y-axis").selectAll("text")
+  .style("fill","#9B9EAC")
+  .style("font-size", "12px")
+  .style("font-weight", "bold")
+  .attr("dy", "5px")
+  .attr("dx", "15px");
 
   // create and transform bars group
   var g = svg.selectAll(".bars")
@@ -62,13 +89,21 @@ export default function BarsChart({activity}) {
   .attr("class", "bars")
   .attr("transform", d => `translate(${x0(d.day)},0)`)
 
-  // add bars info data
+  // add bars info data on hover
   var g2 =  g.append("g")
   .attr("class", "bars-text")
+  .attr('fill-opacity', 0)
 
   g2.append("rect")
-  .attr("y", "50")
-  .attr("x", "15")
+  .attr("y", "0")
+  .attr("x", "-12")
+  .attr("width", "40px")
+  .attr("height", height - margin.top - margin.bottom + "px")
+  .style("fill","#c4c4c4")
+
+  g2.append("rect")
+  .attr("y", "-10")
+  .attr("x", "35")
   .attr("width", "45px")
   .attr("height", "50px")
   .style("fill","red")
@@ -77,16 +112,23 @@ export default function BarsChart({activity}) {
   .text(d => d.kilogram + "kg" )
   .style("fill","white")
   .style("font-size", "10px")
-  .style("background-color", "red" )
-  .attr("dy", "65px")
-  .attr("dx", "25px")
+  .attr("dy", "5px")
+  .attr("dx", "47px")
 
   g2.append("text")
   .text(d => d.calories + "kcal")
   .style("fill","white")
   .style("font-size", "10px")
-  .attr("dy", "90px")
-  .attr("dx", "20px")
+  .attr("dy", "30px")
+  .attr("dx", "40px")
+
+  svg.selectAll('.bars-text')
+  .on('mouseover', function() {
+    d3.select(this).attr('fill-opacity', 1)
+  })
+  .on('mouseout', function() {
+    d3.select(this).attr('fill-opacity', 0)
+  })
 
   // add kilogram bars
   g.selectAll(".bar.kilogram")
@@ -119,32 +161,6 @@ export default function BarsChart({activity}) {
     v${height  - margin.top - margin.bottom - y(d.calories) - ry}
     h${-5}Z
   `);
-
-  // Add X Axis
-  svg.append("g")
-  .attr("class", "x-axis")
-  .attr("transform", "translate(0, "+( height - margin.top - margin.bottom) + ")")
-  .call(xAxis)
-
-  svg.select(".x-axis").selectAll("text")
-  .style("fill","#9B9EAC")
-  .style("font-size", "12px")
-  .style("font-weight", "bold")
-  .attr("dy", "20px")
-  .attr("dx", "-20px");
-  
-  // Add Y Axis
-  svg.append("g")
-  .attr("class", "y-axis")
-  .attr("transform", "translate("+ ( width - margin.left - margin.right)+ ",0)")
-  .call(yAxis);
-
-  svg.select(".y-axis").selectAll("text")
-  .style("fill","#9B9EAC")
-  .style("font-size", "12px")
-  .style("font-weight", "bold")
-  .attr("dy", "5px")
-  .attr("dx", "15px");
 
   return (
     <section className="bars">

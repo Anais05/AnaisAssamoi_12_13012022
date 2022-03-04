@@ -14,6 +14,7 @@ export default function Score({score}) {
   //setup svg wrapper
   var chart = d3.select(".score-chart")
 
+  // Clean duplicate chart
   chart.selectAll(".svg").remove();
 
   //setup svg

@@ -11,13 +11,15 @@ import carbs from '../../assets/carbs.png'
 import fat from '../../assets/fat.png'
 import Score from '../../components/score/Score.js';
 import BarsChart from '../../components/bars-chart/BarsChart.js';
+import LineChart from '../../components/line-chart/LineChart.js';
+
 
 function Dashboard() {
   let userId = useParams().id;
 
   const [user, updateUser] = useState({});
   const [userActivity, updateUserActivity] = useState({});
-  // const [userAverageSession, updateUserAverageSession] = useState({});
+  const [userAverageSession, updateUserAverageSession] = useState({});
   // const [userPerfomance, updateUserPerfomance] = useState({});
 
   useEffect(getData, [userId]);
@@ -27,7 +29,7 @@ function Dashboard() {
 
     api.getUserInfo(userId).then((data) => updateUser(data));
     api.getActivity(userId).then((data) => updateUserActivity(data));
-    // api.getSession(userId).then((data) => updateUserAverageSession(data));
+    api.getSession(userId).then((data) => updateUserAverageSession(data));
     // api.getPerformance(userId).then((data) => updateUserPerfomance(data));
   }
 
@@ -43,6 +45,9 @@ function Dashboard() {
           }
           {(user.score) &&
             <Score score={user.score} />
+          }
+          {(userAverageSession.sessions) &&
+            <LineChart sessions={userAverageSession.sessions} />
           }
         </div>
 
