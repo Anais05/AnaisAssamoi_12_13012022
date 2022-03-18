@@ -58,11 +58,11 @@ export default function BarsChart({activity}) {
 
   // add X Axis
   svg.append("g")
-  .attr("class", "x-axis")
+  .attr("class", "bars-x-axis")
   .attr("transform", "translate(0, "+( height - margin.top - margin.bottom) + ")")
   .call(xAxis)
 
-  svg.select(".x-axis").selectAll("text")
+  svg.select(".bars-x-axis").selectAll("text")
   .style("fill","#9B9EAC")
   .style("font-size", "12px")
   .style("font-weight", "bold")
@@ -71,11 +71,11 @@ export default function BarsChart({activity}) {
   
   // add Y Axis
   svg.append("g")
-  .attr("class", "y-axis")
+  .attr("class", "bars-y-axis")
   .attr("transform", "translate("+ ( width - margin.left - margin.right)+ ",0)")
   .call(yAxis);
 
-  svg.select(".y-axis").selectAll("text")
+  svg.select(".bars-y-axis").selectAll("text")
   .style("fill","#9B9EAC")
   .style("font-size", "12px")
   .style("font-weight", "bold")

@@ -1,3 +1,24 @@
 .line {
   width: 300px;
 }
+
+.line-x-axis .domain {
+  color: transparent;
+}
+
+.line-y-axis {
+  color: transparent;
+}
+
+.circle-ponter {
+  opacity: 0.5;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.tooltip {
+  fill: white;
+}
