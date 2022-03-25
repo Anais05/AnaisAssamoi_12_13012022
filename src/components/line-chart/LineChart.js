@@ -19,7 +19,6 @@ export default function LineChart({sessions}) {
   var width = 300 - margin.left - margin.right;
   var height = 350 - margin.top - margin.bottom;
 
-
   // setup svg wrapper
   var chart = d3.select(".line-chart")
 
@@ -29,7 +28,7 @@ export default function LineChart({sessions}) {
   // add group container
   var svg = chart.append("svg")
   .attr("class", "svg")
-  .attr("width", width + margin.left + margin.right)
+  .attr("width", 260)
   .attr("height", height + margin.top + margin.bottom)
   .append("g");
 
@@ -38,7 +37,6 @@ export default function LineChart({sessions}) {
   .attr("y", "0")
   .attr("x", "0")
   .attr("rx", 10)
-  .attr("ry", 10)
   .attr("width", 260)
   .attr("height", height + margin.top)
   .attr("fill", "red")
@@ -62,9 +60,8 @@ export default function LineChart({sessions}) {
   .style("font-size", "18px")
   .text("sessions");
 
-
   // add scales
-  var x = d3.scaleBand().range([0, width + margin.left + margin.right])
+  var x = d3.scaleBand().range([0, 330])
   var y = d3.scaleLinear().range([height - margin.top - margin.left, 0]);
 
   // set Axis
@@ -78,8 +75,7 @@ export default function LineChart({sessions}) {
   .tickSize(0)
 
   var yAxis = d3.axisLeft(y)
-  .ticks(5)
-  .tickSize(1)
+  .tickSize(0)
 
   x.domain(newData.map(d=> d.day));
   y.domain([0, d3.max(newData, d => d.sessionLength)]);
@@ -87,13 +83,13 @@ export default function LineChart({sessions}) {
   // add Axis
   svg.append("g")
   .attr("class", "line-x-axis")
-  .attr("transform", "translate(-20, "+ height + ")")
+  .attr("transform", "translate(-35, "+ height + ")")
   .call(xAxis)
 
   svg.select(".line-x-axis").selectAll("text")
   .style("fill","white")
-  .style("font-size", "13px")
-  .attr("dy", "20px")
+  .style("font-size", "14px")
+  .attr("y", "10px")
 
   svg.append("g")
   .attr("class", "line-y-axis")
@@ -112,7 +108,7 @@ export default function LineChart({sessions}) {
   .attr("stroke", "white")
   .attr("stroke-width", 2)
   .attr("d", line)
-  .attr("transform", "translate(0, "+ (width - margin.left) +")");
+  .attr("transform", "translate(-15, "+ (width - margin.left) +")");
 
   // creation tooltip group
   var tooltip = svg.append("g")
@@ -124,14 +120,13 @@ export default function LineChart({sessions}) {
   .attr("fill", "#fff")
   .attr("class", "circle-ponter")
   .attr("r", 10)
-  .attr("transform", "translate(0, 150)");
-
+  .attr("transform", "translate(-15, 150)");
 
   // Le cercle intérieur
   tooltip.append("circle")
   .attr("fill", "#fff")
   .attr("r", 4)
-  .attr("transform", "translate(0, 150)");
+  .attr("transform", "translate(-15, 150)");
 
   tooltip.append("rect")
   .attr("class", "tooltip")
@@ -152,28 +147,43 @@ export default function LineChart({sessions}) {
   .attr("dx", "-8")
   .attr("id", "tooltip-time")
 
+  // creation area hover
+  var hover = svg.append("g")
+  .attr("id", "hover")
+  .style("display", "none");
+
+  var hoverRect = hover.append("rect")
+  .attr("class", "hover")
+  .attr("height", height + margin.top)
+  .style("fill", "e60000")
+
+  // creation mouse event
   svg.append("rect")
   .attr("class", "overlay")
   .attr("width", 260)
   .attr("height", height + margin.top)
   .on("mouseover", function() { 
     tooltip.style("display", null);
+    hover.style("display", null);
   })
   .on("mouseout", function() {
     tooltip.style("display", "none");
+    hover.style("display", "none")
   })
-  .on("mousemove", scalePointPosition);
+  .on("mousemove", mousemove);
 
-  function scalePointPosition(event) {
+  function mousemove(event) {
     var xPos = d3.pointer(event)[0];
     var domain = x.domain(); 
     var range = x.range();
     var rangePoints = d3.range(range[0], range[1], x.step())
-    var yPos = domain[d3.bisect(rangePoints, xPos) -1];
+    var yPos = domain[d3.bisect(rangePoints, xPos)];
     var d = newData[yPos];
 
     tooltip.attr("transform", "translate(" + x(d.day) + "," + y(d.sessionLength) + ")");
-    
+    hover.attr("transform", "translate(" + xPos + ",0)");
+    hoverRect.attr("width", 260-xPos);
+
     d3.select('#tooltip-time')
     .text(d.sessionLength + "min");
   }

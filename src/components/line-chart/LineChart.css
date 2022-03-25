@@ -22,3 +22,7 @@
 .tooltip {
   fill: white;
 }
+
+.hover {
+  opacity: 0.2;
+}
