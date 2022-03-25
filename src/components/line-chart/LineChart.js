@@ -123,40 +123,34 @@ export default function LineChart({sessions}) {
   tooltip.append("circle")
   .attr("fill", "#fff")
   .attr("class", "circle-ponter")
-  .attr("r", 10);
+  .attr("r", 10)
+  .attr("transform", "translate(0, 150)");
+
 
   // Le cercle intérieur
   tooltip.append("circle")
   .attr("fill", "#fff")
-  .attr("r", 4);
+  .attr("r", 4)
+  .attr("transform", "translate(0, 150)");
 
-  tooltip.append("polyline")
-  .attr("points","0,0 0,40 55,40 60,45 65,40 120,40 120,0 0,0")
+  tooltip.append("rect")
+  .attr("class", "tooltip")
+  .attr("width", 50)
+  .attr("height", 25)
+  .attr("x", 10)
+  .attr("y", 52)
   .style("fill", "#fafafa")
-  .style("stroke","#3498db")
-  .style("opacity","0.9")
-  .style("stroke-width","1")
-  .attr("transform", "translate(-60, -55)");
+  .attr("transform", "translate(-35, 50)");
 
   var text = tooltip.append("text")
   .style("font-size", "13px")
   .style("color", "black")
   .style("fill", "black")
-  .attr("transform", "translate(-50, -40)");
-
-  // tooltip.append("rect")
-  // .attr("class", "tooltip")
-  // .attr("width", 100)
-  // .attr("height", 50)
-  // .attr("x", 10)
-  // .attr("y", 52)
-  // .attr("transform", "translate(0, "+ (width - margin.left) +")");
+  .attr("transform", "translate(-10, 120)");
 
   text.append("tspan")
-  .attr("dx", "-5")
-  .attr("id", "tooltip-date");
-
-  var bisectDate = d3.bisector(d => d.day).left;
+  .attr("dx", "-8")
+  .attr("id", "tooltip-time")
 
   svg.append("rect")
   .attr("class", "overlay")
@@ -168,13 +162,16 @@ export default function LineChart({sessions}) {
   .on("mouseout", function() {
     tooltip.style("display", "none");
   })
-  .on("mousemove", mousemove);
+  .on("mousemove", scalePointPosition);
 
-  function mousemove(event) {
-    var x0 = x.invert(d3.pointer(event)[0]),
-    i = bisectDate(newData, x0),
-    d = newData[i];
-    
+  function scalePointPosition(event) {
+    var xPos = d3.pointer(event)[0];
+    var domain = x.domain(); 
+    var range = x.range();
+    var rangePoints = d3.range(range[0], range[1], x.step())
+    var yPos = domain[d3.bisect(rangePoints, xPos) -1];
+    var d = newData[yPos];
+
     tooltip.attr("transform", "translate(" + x(d.day) + "," + y(d.sessionLength) + ")");
     
     d3.select('#tooltip-time')
