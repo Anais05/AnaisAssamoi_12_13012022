@@ -8,7 +8,7 @@ export default class Performance {
     this.kind = data.kind;
     this.data = data.data.map((item) => ({
       value: item.value,
-      kind: item.kind,
+      kind: this.kind[item.kind],
     }));
   }
 }

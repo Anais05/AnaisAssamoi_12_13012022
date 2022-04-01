@@ -3,10 +3,20 @@ import Session from "../models/Session";
 import Performance from "../models/Performance";
 import Activity from "../models/Activity";
 
+/**
+ * @description class that provides methods which fetch all user datas
+*/
+
 export default class getData {
   constructor() {
     this.baseUrl = "http://localhost:3000";
   }
+
+  /**
+   * @description gets the user information
+   * @param {number} userId  id of the user (12 or 18)
+   * @returns user data with User model object
+  */
 
   async getUserInfo(userId) {
     try {
@@ -18,6 +28,12 @@ export default class getData {
     }
   }
 
+  /**
+   * @description gets the user activity
+   * @param {number} userId  id of the user (12 or 18)
+   * @returns user activity with Activity model object
+  */
+
   async getActivity(userId) {
     try {
       const resp = await fetch(`${this.baseUrl}/user/${userId}/activity`)
@@ -27,6 +43,12 @@ export default class getData {
       console.log(error);
     }
   }
+
+  /**
+   * @description gets the user session
+   * @param {number} userId  id of the user (12 or 18)
+   * @returns user session with Session model object
+  */
 
   async getSession(userId) {
     try {
@@ -38,6 +60,11 @@ export default class getData {
     }
   }
 
+  /**
+   * @description gets the user performance
+   * @param {number} userId  id of the user (12 or 18)
+   * @returns user performance with Performance model object
+  */
   async getPerformance(userId) {
     try {
       const resp = await fetch(`${this.baseUrl}/user/${userId}/performance`)
