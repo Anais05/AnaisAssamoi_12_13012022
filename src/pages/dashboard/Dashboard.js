@@ -9,10 +9,10 @@ import calories from '../../assets/calories.png'
 import protein from '../../assets/protein.png'
 import carbs from '../../assets/carbs.png'
 import fat from '../../assets/fat.png'
-import Score from '../../components/score/Score.js';
-import BarsChart from '../../components/bars-chart/BarsChart.js';
-import LineChart from '../../components/line-chart/LineChart.js';
-import RadarChart from '../../components/rader-chart/RadarChart.js'
+import ScoreChart from '../../components/chart/score-chart/ScoreChart.js';
+import BarsChart from '../../components/chart/bars-chart/BarsChart.js';
+import LineChart from '../../components/chart/line-chart/LineChart.js';
+import RadarChart from '../../components/chart/radar-chart/RadarChart.js'
 
 
 function Dashboard() {
@@ -28,7 +28,6 @@ function Dashboard() {
   /**
    * @description gets all user data from API
   */
-
   function getData() {
     const api = new Api();
 
@@ -49,7 +48,7 @@ function Dashboard() {
             <BarsChart activity={userActivity.sessions} />
           }
           {(user.score) &&
-            <Score score={user.score} />
+            <ScoreChart score={user.score} />
           }
           {(userAverageSession.sessions) &&
             <LineChart sessions={userAverageSession.sessions} />
@@ -60,30 +59,30 @@ function Dashboard() {
         </div>
 
         <div className="dashboard-aside">
-            <DashboardAside
-                  image={calories}
-                  title="Calories"
-                  value={user?.keyData?.calorieCount}
-                  unit="kCal"
-                />
-                <DashboardAside
-                  image={protein}
-                  title="Protéines"
-                  value={user?.keyData?.proteinCount}
-                  unit="g"
-                />
-                <DashboardAside
-                  image={carbs}
-                  title="Gulicides"
-                  value={user?.keyData?.carbohydrateCount}
-                  unit="g"
-                />
-                <DashboardAside
-                  image={fat}
-                  title="Lipides"
-                  value={user?.keyData?.lipidCount}
-                  unit="g"
-                />
+          <DashboardAside
+            image={calories}
+            title="Calories"
+            value={user?.keyData?.calorieCount}
+            unit="kCal"
+          />
+          <DashboardAside
+            image={protein}
+            title="Protéines"
+            value={user?.keyData?.proteinCount}
+            unit="g"
+          />
+          <DashboardAside
+            image={carbs}
+            title="Gulicides"
+            value={user?.keyData?.carbohydrateCount}
+            unit="g"
+          />
+          <DashboardAside
+            image={fat}
+            title="Lipides"
+            value={user?.keyData?.lipidCount}
+            unit="g"
+          />
         </div>
       </div>
     </div>

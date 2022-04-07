@@ -2,7 +2,6 @@ import React from "react";
 import "./Greeting.css";
 import PropTypes from "prop-types";
 
-
 export default function Greeting({ userName }) {
   return (
     <div className="greeting">

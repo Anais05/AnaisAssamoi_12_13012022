@@ -2,6 +2,10 @@
   width: 300px;
 }
 
+.svg {
+  border-radius: 10px;
+}
+
 .line-x-axis .domain {
   color: transparent;
 }

@@ -4,7 +4,9 @@ import Performance from "../models/Performance";
 import Activity from "../models/Activity";
 
 /**
+ * @class
  * @description class that provides methods which fetch all user datas
+ * @constructor
 */
 
 export default class getData {

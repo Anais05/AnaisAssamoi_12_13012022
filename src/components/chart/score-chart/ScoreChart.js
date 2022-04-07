@@ -1,9 +1,10 @@
 import * as d3 from "d3";
 import React from "react";
 import PropTypes from "prop-types";
-import "./Score.css"
+import "./ScoreChart.css"
 
-export default function Score({score}) {
+export default function ScoreChart({score}) {
+  // set chart parameters
   var scorePercent = score * 100;
   var total = 100;
   var progress = 0;
@@ -11,43 +12,43 @@ export default function Score({score}) {
   var height = 300;
   var endAngle = Math.PI * -2;
 
-  //setup svg wrapper
+  // setup svg wrapper
   var chart = d3.select(".score-chart")
 
-  // Clean duplicate chart
+  // clean duplicate chart
   chart.selectAll(".svg").remove();
 
-  //setup svg
+  // setup svg
   var svg = chart.append("svg")
   .attr("class", "svg")
   .attr("width", width)
   .attr("height", height)
 
-  //Define the circle
+  // define the circle
   var circle = d3.arc()
   .startAngle(0)
   .innerRadius(90)
   .outerRadius(105)
   .cornerRadius(20);
 
-  // Add group container
+  // add group container
   var g = svg.append("g")
-    .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
+  .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
 
-  //Setup track
+  // setup track
   var track = g.append("g");
   track.append("path")
   .attr("fill", "white")
   .attr("stroke-width", 3 + "px")
   .attr("d", circle.endAngle(endAngle));
 
-  //Add colour fill
+  // add colour fill
   var value = track.append("path")
   .attr("class", "radial-path")
   .attr("fill", "red")
   .attr("stroke-width", 3 + "px"); 
 
-  // Add text 
+  // add text 
   track.append("text")
   .attr("text-anchor", "middle")
   .attr("class", "percent-complete")
@@ -74,7 +75,7 @@ export default function Score({score}) {
   .style("font-size", "16px")
   .style("font-weight", "bold");
 
-  //Action
+  // action
   var i = d3.interpolate( progress, scorePercent / total);
 
   d3.transition().duration(1000).tween("progress", function() {
@@ -92,6 +93,6 @@ export default function Score({score}) {
   );
 }
 
-Score.prototype = {
+ScoreChart.prototype = {
   score: PropTypes.number,
 }

@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 import "./BarsChart.css"
 
 export default function BarsChart({activity}) {
+  // set new data for x axis
   var newData = activity.map((a, index) => {
     return {
       "day": index + 1,
       "kilogram": a.kilogram,
       "calories": a.calories,
     }
-  })
+  });
 
+  // set chart parameters
   var margin = {top: 30, right: 40, bottom: 30, left: 10};
   var width = 700;
   var height = 250;
@@ -22,7 +24,7 @@ export default function BarsChart({activity}) {
   // setup svg wrapper
   var chart = d3.select(".bars-chart")
 
-  // Clean duplicate chart
+  // clean duplicate chart
   chart.selectAll(".svg").remove();
 
   // add group container

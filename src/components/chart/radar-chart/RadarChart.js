@@ -4,17 +4,20 @@ import PropTypes from "prop-types";
 import "./RadarChart.css"
 
 export default function RadarChart({perf}) {
+  // set new data
   var axes = perf.map(p => {
     return {
       "axis": p.kind[0].toUpperCase() + p.kind.substring(1),
       "value": p.value,
     }
-  })
+  });
   var newData = [axes];
+
+  // set width and height parameters
   var width = 200;
   var height = 200;
-  console.log(newData)
 
+  // create radial chart
   var RadarChart = {
     /**
      * @description draw radial chart
@@ -45,10 +48,13 @@ export default function RadarChart({perf}) {
           }
         }
       }
-            
+           
+      // set axis parameters
       var allAxis = (data[0].map(i => {return i.axis }));
       var total = allAxis.length;
       var radius = cfg.factor*Math.min(cfg.w/2, cfg.h/2);
+
+      // clean duplicate chart
       d3.select(select).select("svg").remove();
   
       // set svg and group
@@ -124,6 +130,7 @@ export default function RadarChart({perf}) {
     }
   };
 
+  // set chart configuration parameters
   var config = {
     w: width,
     h: height,
@@ -131,6 +138,7 @@ export default function RadarChart({perf}) {
     levels: 5,
   }
 
+  // draw chart
   RadarChart.draw(".radar-chart", newData, config);
 
   return (

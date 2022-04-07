@@ -1,3 +1,9 @@
+/**
+ * @class User
+ * @description User model
+ * @constructor
+ * @param {object} data user data
+*/
 export default class User {
   id;
   userInfos;

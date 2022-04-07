@@ -1,3 +1,9 @@
+/**
+ * @class Performance
+ * @description performnce model
+ * @constructor
+ * @param {object} data user performance data
+*/
 export default class Performance {
   userId;
   kind;

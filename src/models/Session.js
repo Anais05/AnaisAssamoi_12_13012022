@@ -1,3 +1,9 @@
+/**
+ * @class Session
+ * @description Session model
+ * @constructor
+ * @param {object} data user average session data
+*/
 export default class Session {
   userId;
   sessions;
