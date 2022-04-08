@@ -15,7 +15,7 @@ export default function BarsChart({activity}) {
 
   // set chart parameters
   var margin = {top: 30, right: 40, bottom: 30, left: 10};
-  var width = 700;
+  var width = 750;
   var height = 250;
   var barPadding = .2;
   var rx = 3;
@@ -164,9 +164,50 @@ export default function BarsChart({activity}) {
     h${-5}Z
   `);
 
+  // add chart title and text 
+  svg.append("text")
+  .attr("x", 80)             
+  .attr("y", -15)
+  .attr("text-anchor", "middle")
+  .style("fill", "black")
+  .style("font-weight", "500")
+  .style("font-size", "18px")
+  .text("Activité quotidienne");
+
+  svg.append("circle")
+  .attr("fill", "#282D30")
+  .attr("r", 4)
+  .attr("cx", 450)      
+  .attr("cy", -20)
+
+  svg.append("text")
+  .attr("class", "middle")
+  .attr("x", 500)      
+  .attr("y", -15)
+  .attr("text-anchor", "middle")
+  .style("fill", "#74798C")
+  .style("font-weight", "500")
+  .style("font-size", "14px")
+  .text("Poids (kg)");
+
+  svg.append("circle")
+  .attr("fill", "red")
+  .attr("r", 4)
+  .attr("cx", 570)      
+  .attr("cy", -20)
+
+  svg.append("text")
+  .attr("class", "middle")
+  .attr("x", 660)      
+  .attr("y", -15)
+  .attr("text-anchor", "middle")
+  .style("fill", "#74798C")
+  .style("font-weight", "500")
+  .style("font-size", "14px")
+  .text("Calories brûlées (kCal)");
+
   return (
     <section className="bars">
-      <p className="bars-title">Activité quotidienne</p>
       <div className="bars-chart"></div>
     </section>
   );

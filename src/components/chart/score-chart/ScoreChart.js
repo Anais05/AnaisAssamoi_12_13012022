@@ -8,7 +8,7 @@ export default function ScoreChart({score}) {
   var scorePercent = score * 100;
   var total = 100;
   var progress = 0;
-  var width = 300;
+  var width = 250;
   var height = 300;
   var endAngle = Math.PI * -2;
 
@@ -75,6 +75,16 @@ export default function ScoreChart({score}) {
   .style("font-size", "16px")
   .style("font-weight", "bold");
 
+  // add chart title
+  svg.append("text")
+  .attr("x", 40)             
+  .attr("y", 40)
+  .attr("text-anchor", "middle")
+  .style("fill", "black")
+  .style("font-weight", "500")
+  .style("font-size", "18px")
+  .text("Score");
+
   // action
   var i = d3.interpolate( progress, scorePercent / total);
 
@@ -87,7 +97,6 @@ export default function ScoreChart({score}) {
 
   return (
     <section className="score">
-      <p className="score-title">Score</p>
       <div className="score-chart"></div>
     </section>
   );

@@ -47,14 +47,14 @@ function Dashboard() {
           {(userActivity.sessions) &&
             <BarsChart activity={userActivity.sessions} />
           }
-          {(user.score) &&
-            <ScoreChart score={user.score} />
-          }
           {(userAverageSession.sessions) &&
             <LineChart sessions={userAverageSession.sessions} />
           }
           {(userPerfomance.data) &&
             <RadarChart perf={userPerfomance.data} />
+          }
+          {(user.score) &&
+            <ScoreChart score={user.score} />
           }
         </div>
 
