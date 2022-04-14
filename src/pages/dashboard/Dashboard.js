@@ -45,15 +45,18 @@ export default function Dashboard() {
           {(userActivity.sessions) &&
             <BarsChart activity={userActivity.sessions} />
           }
-          {(userAverageSession.sessions) &&
-            <LineChart sessions={userAverageSession.sessions} />
-          }
-          {(userPerfomance.data) &&
-            <RadarChart perf={userPerfomance.data} />
-          }
-          {(user.score) &&
-            <ScoreChart score={user.score} />
-          }
+          <div className="mini-charts">
+            {(userAverageSession.sessions) &&
+              <LineChart sessions={userAverageSession.sessions} />
+            }
+            {(userPerfomance.data) &&
+              <RadarChart perf={userPerfomance.data} />
+            }
+            {(user.score) &&
+              <ScoreChart score={user.score} />
+            }
+          </div>
+
         </div>
 
         <div className="dashboard-aside">

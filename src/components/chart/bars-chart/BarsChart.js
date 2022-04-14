@@ -6,7 +6,7 @@ import "./BarsChart.css"
 export default function BarsChart({activity}) {
   // set svg ref and dimensions
   const svgRef = useRef(null);
-  const svgWidth = 950;
+  const svgWidth = 875;
   const svgHeight = 300;
 
   useEffect(() => {  
@@ -20,7 +20,7 @@ export default function BarsChart({activity}) {
     });
     // set chart parameters
     var margin = {top: 30, right: 40, bottom: 30, left: 10};
-    var width = 950;
+    var width = 875;
     var height = 300;
     var barPadding = .2;
     var rx = 3;
@@ -74,7 +74,7 @@ export default function BarsChart({activity}) {
     .style("font-size", "14px")
     .style("font-weight", "800")
     .attr("dy", "20px")
-    .attr("dx", "-40px");
+    .attr("dx", "-35px");
     
     // add Y Axis
     svg.append("g")
@@ -182,12 +182,12 @@ export default function BarsChart({activity}) {
     svg.append("circle")
     .attr("fill", "#282D30")
     .attr("r", 4)
-    .attr("cx", 675)      
+    .attr("cx", 590)      
     .attr("cy", -19)
 
     svg.append("text")
     .attr("class", "middle")
-    .attr("x", 720)      
+    .attr("x", 630)      
     .attr("y", -15)
     .attr("text-anchor", "middle")
     .style("fill", "#74798C")
@@ -198,12 +198,12 @@ export default function BarsChart({activity}) {
     svg.append("circle")
     .attr("fill", "red")
     .attr("r", 4)
-    .attr("cx", 785)      
+    .attr("cx", 700)      
     .attr("cy", -19)
 
     svg.append("text")
     .attr("class", "middle")
-    .attr("x", 870)      
+    .attr("x", 780)      
     .attr("y", -15)
     .attr("text-anchor", "middle")
     .style("fill", "#74798C")

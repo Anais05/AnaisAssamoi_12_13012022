@@ -138,13 +138,13 @@ export default function LineChart({sessions}) {
     .attr("x", 0)
     .attr("y", 20)
     .style("fill", "#fafafa")
-    .attr("transform", "translate(-40, 60)");
+    .attr("transform", "translate(-45, 60)");
 
     // add tooltip text
     var text = tooltip.append("text")
     .style("font-size", "12px")
     .style("color", "black")
-    .attr("transform", "translate(-15, 100)");
+    .attr("transform", "translate(-18, 100)");
 
     text.append("tspan")
     .attr("dx", "-22")
@@ -177,8 +177,6 @@ export default function LineChart({sessions}) {
       var yPos = domain[d3.bisect(rangePoints, xPos)];
       var d = newData[yPos];
 
-
-      
       tooltip.attr("transform", "translate(" + x(d.day) + "," + y(d.sessionLength) + ")");
       hover.attr("transform", "translate(" + (x(d.day)-25) + ",0)");
       hoverRect.attr("width", width-yPos);

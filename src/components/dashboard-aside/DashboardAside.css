@@ -1,4 +1,5 @@
 .count {
+  width: 150px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,4 +23,10 @@ img {
   font-weight: 500;
   color: #74798c;
   margin: unset;
+}
+
+@media screen and (max-width: 1260px) {
+  .count {
+    margin-right: 20px;
+  }
 }

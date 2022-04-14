@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function DashboardAside({ image, title, value, unit }) {
   return (
-    <div className="count ">
+    <div className="count">
       <img src={image} alt={title} />
       <div className="count-text">
         <div className="value">
