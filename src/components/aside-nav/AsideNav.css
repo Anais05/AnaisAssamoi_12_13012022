@@ -2,7 +2,7 @@
   background-color: #020203;
   width: 6%;
   position: absolute;
-  height: calc(150% - 70px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

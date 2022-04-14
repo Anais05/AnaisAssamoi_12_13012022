@@ -4,100 +4,108 @@ import PropTypes from "prop-types";
 import "./ScoreChart.css"
 
 export default function ScoreChart({score}) {
-  // set chart parameters
-  var scorePercent = score * 100;
-  var total = 100;
-  var progress = 0;
-  var width = 250;
-  var height = 300;
-  var endAngle = Math.PI * -2;
+  // set svg ref and dimensions
+  const svgRef = React.useRef(null);
+  const svgWidth = 280;
+  const svgHeight = 300;
 
-  // setup svg wrapper
-  var chart = d3.select(".score-chart")
+  React.useEffect(() => {  
+    // set chart parameters
+    var scorePercent = score * 100;
+    var total = 100;
+    var progress = 0;
+    var width = 280;
+    var height = 300;
+    var endAngle = Math.PI * -2;
 
-  // clean duplicate chart
-  chart.selectAll(".svg").remove();
+    // setup svg wrapper
+    var chart = d3.select(svgRef.current)
 
-  // setup svg
-  var svg = chart.append("svg")
-  .attr("class", "svg")
-  .attr("width", width)
-  .attr("height", height)
+    // clean duplicate chart
+    chart.selectAll("*").remove();
 
-  // define the circle
-  var circle = d3.arc()
-  .startAngle(0)
-  .innerRadius(90)
-  .outerRadius(105)
-  .cornerRadius(20);
+    // setup svg
+    var svg = chart.append("svg")
+    .attr("class", "svg")
+    .attr("width", width)
+    .attr("height", height)
 
-  // add group container
-  var g = svg.append("g")
-  .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
+    // define the circle
+    var circle = d3.arc()
+    .startAngle(0)
+    .innerRadius(90)
+    .outerRadius(105)
+    .cornerRadius(20);
 
-  // setup track
-  var track = g.append("g");
-  track.append("path")
-  .attr("fill", "white")
-  .attr("stroke-width", 3 + "px")
-  .attr("d", circle.endAngle(endAngle));
+    // add group container
+    var g = svg.append("g")
+    .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
 
-  // add colour fill
-  var value = track.append("path")
-  .attr("class", "radial-path")
-  .attr("fill", "red")
-  .attr("stroke-width", 3 + "px"); 
+    // setup track
+    var track = g.append("g");
+    track.append("path")
+    .attr("fill", "white")
+    .attr("stroke-width", 3 + "px")
+    .attr("d", circle.endAngle(endAngle));
 
-  // add text 
-  track.append("text")
-  .attr("text-anchor", "middle")
-  .attr("class", "percent-complete")
-  .text(scorePercent + "%")
-  .style("fill","#282D30")
-  .style("font-size", "26px")
-  .style("font-weight", "bold");
+    // add colour fill
+    var value = track.append("path")
+    .attr("class", "radial-path")
+    .attr("fill", "red")
+    .attr("stroke-width", 3 + "px"); 
 
-  track.append("text")
-  .attr("text-anchor", "middle")
-  .attr("class", "objectif-text")
-  .attr("dy", "25px")
-  .text("de votre")
-  .style("fill","#74798c")
-  .style("font-size", "16px")
-  .style("font-weight", "bold");
+    // add text 
+    track.append("text")
+    .attr("text-anchor", "middle")
+    .attr("class", "percent-complete")
+    .text(scorePercent + "%")
+    .style("fill","#282D30")
+    .style("font-size", "26px")
+    .style("font-weight", "bold");
 
-  track.append("text")
-  .attr("text-anchor", "middle")
-  .attr("class", "objectif-text")
-  .attr("dy", "50px")
-  .text("objectif")
-  .style("fill","#74798c")
-  .style("font-size", "16px")
-  .style("font-weight", "bold");
+    track.append("text")
+    .attr("text-anchor", "middle")
+    .attr("class", "objectif-text")
+    .attr("dy", "25px")
+    .text("de votre")
+    .style("fill","#74798c")
+    .style("font-size", "16px")
+    .style("font-weight", "bold");
 
-  // add chart title
-  svg.append("text")
-  .attr("x", 40)             
-  .attr("y", 40)
-  .attr("text-anchor", "middle")
-  .style("fill", "black")
-  .style("font-weight", "500")
-  .style("font-size", "18px")
-  .text("Score");
+    track.append("text")
+    .attr("text-anchor", "middle")
+    .attr("class", "objectif-text")
+    .attr("dy", "50px")
+    .text("objectif")
+    .style("fill","#74798c")
+    .style("font-size", "16px")
+    .style("font-weight", "bold");
 
-  // action
-  var i = d3.interpolate( progress, scorePercent / total);
+    // add chart title
+    svg.append("text")
+    .attr("x", 40)             
+    .attr("y", 40)
+    .attr("text-anchor", "middle")
+    .style("fill", "black")
+    .style("font-weight", "500")
+    .style("font-size", "18px")
+    .text("Score");
 
-  d3.transition().duration(1000).tween("progress", function() {
-    return function(t) {
-      progress = i(t);
-      value.attr("d", circle.endAngle(endAngle * progress))
-    };
-  });
+    // action
+    var i = d3.interpolate( progress, scorePercent / total);
+
+    d3.transition().duration(1000).tween("progress", function() {
+      return function(t) {
+        progress = i(t);
+        value.attr("d", circle.endAngle(endAngle * progress))
+      };
+    });
+
+  },[score]); // redraw chart if data changes
 
   return (
     <section className="score">
-      <div className="score-chart"></div>
+      <svg ref={svgRef} width={svgWidth} height={svgHeight}/>
     </section>
   );
 }
