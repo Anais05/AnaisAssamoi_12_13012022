@@ -1,15 +1,15 @@
 import * as d3 from "d3";
-import React from "react";
+import { React, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./LineChart.css"
 
 export default function LineChart({sessions}) {
   // set svg ref and dimensions
-  const svgRef = React.useRef(null);
+  const svgRef = useRef(null);
   const svgWidth = 280;
   const svgHeight = 300;
 
-  React.useEffect(() => {  
+  useEffect(() => {  
     // set days for x axis
     var weekDays = ["L", "M", "M", "J", "V", "S", "D"];
 

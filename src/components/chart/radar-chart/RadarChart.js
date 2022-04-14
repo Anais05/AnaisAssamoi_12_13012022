@@ -1,15 +1,15 @@
 import * as d3 from "d3";
-import React from "react";
+import { React, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./RadarChart.css"
 
 export default function RadarChart({perf}) {
   // set svg ref and dimensions
-  const svgRef = React.useRef(null);
+  const svgRef = useRef(null);
   const svgWidth = 280;
   const svgHeight = 300;
 
-  React.useEffect(() => {
+  useEffect(() => {
     // set new data
     var axes = perf.map(p => {
       return {
@@ -164,7 +164,7 @@ export default function RadarChart({perf}) {
   return (
     <section className="radar">
         <div className="radar-chart">
-          <svg ref={svgRef}  width={svgWidth} height={svgHeight} />
+          <svg ref={svgRef} width={svgWidth} height={svgHeight} />
         </div>
     </section>
   );

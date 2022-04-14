@@ -1,15 +1,15 @@
 import * as d3 from "d3";
-import React from "react";
+import { React, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./BarsChart.css"
 
 export default function BarsChart({activity}) {
   // set svg ref and dimensions
-  const svgRef = React.useRef(null);
+  const svgRef = useRef(null);
   const svgWidth = 950;
   const svgHeight = 300;
 
-  React.useEffect(() => {  
+  useEffect(() => {  
     // set new data for x axis
     var newData = activity.map((a, index) => {
       return {

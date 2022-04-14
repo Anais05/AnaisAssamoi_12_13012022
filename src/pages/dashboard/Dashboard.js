@@ -1,6 +1,5 @@
-import React from 'react';
+import { React, useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
 import Api from "../../utils/Api.js";
 import './Dashboard.css'
 import Greeting from '../../components/greeting/Greeting.js';
@@ -14,9 +13,8 @@ import BarsChart from '../../components/chart/bars-chart/BarsChart.js';
 import LineChart from '../../components/chart/line-chart/LineChart.js';
 import RadarChart from '../../components/chart/radar-chart/RadarChart.js'
 
-
-function Dashboard() {
-  let userId = useParams().id;
+export default function Dashboard() {
+  const userId = useParams().id;
 
   const [user, updateUser] = useState({});
   const [userActivity, updateUserActivity] = useState({});
@@ -87,6 +85,4 @@ function Dashboard() {
       </div>
     </div>
   )
-}
-
-export default Dashboard;
+};
