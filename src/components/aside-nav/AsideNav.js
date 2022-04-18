@@ -5,7 +5,7 @@ import biking from '../../assets/biking.png';
 import weight from '../../assets/weight.png';
 import './AsideNav.css';
 
-function AsideNav() {
+export default function AsideNav() {
   return (
     <div className="aside-nav">
       <div className="aside-icons">
@@ -26,5 +26,3 @@ function AsideNav() {
     </div>
   );
 }
-
-export default AsideNav;

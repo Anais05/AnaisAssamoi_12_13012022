@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./ScoreChart.css"
 
 export default function ScoreChart({score}) {
-  // set svg ref and dimensions
+  // set svg reference and dimensions
   const svgRef = useRef(null);
   const svgWidth = 280;
   const svgHeight = 300;
@@ -14,8 +14,6 @@ export default function ScoreChart({score}) {
     var scorePercent = score * 100;
     var total = 100;
     var progress = 0;
-    var width = 280;
-    var height = 300;
     var endAngle = Math.PI * -2;
 
     // setup svg wrapper
@@ -27,8 +25,8 @@ export default function ScoreChart({score}) {
     // setup svg
     var svg = chart.append("svg")
     .attr("class", "svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
 
     // define the circle
     var circle = d3.arc()
@@ -39,7 +37,7 @@ export default function ScoreChart({score}) {
 
     // add group container
     var g = svg.append("g")
-    .attr("transform","translate(" + width / 2 + "," + height / 2 + ")");
+    .attr("transform","translate(" + svgWidth / 2 + "," + svgHeight / 2 + ")");
 
     // setup track
     var track = g.append("g");

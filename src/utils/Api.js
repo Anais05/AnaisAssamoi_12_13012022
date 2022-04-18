@@ -27,6 +27,7 @@ export default class getData {
       return new User(data.data);
     } catch (error) {
       console.error(error);
+      document.location.href = "/error";
     }
   }
 
@@ -43,6 +44,7 @@ export default class getData {
       return new Activity(data.data);
     } catch (error) {
       console.log(error);
+      document.location.href = "/error";
     }
   }
 
@@ -59,6 +61,7 @@ export default class getData {
       return new Session(data.data);
     } catch (error) {
       console.log(error);
+      document.location.href = "/error";
     }
   }
 
@@ -74,6 +77,7 @@ export default class getData {
       return new Performance(data.data);
     } catch (error) {
       console.log(error);
+      document.location.href = "/error";
     }
   }
 }

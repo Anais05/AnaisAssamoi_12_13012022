@@ -1,0 +1,18 @@
+.error {
+  margin: 100px 30px 10px 9%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 32px;
+  color: #e60000;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: bold;
+}

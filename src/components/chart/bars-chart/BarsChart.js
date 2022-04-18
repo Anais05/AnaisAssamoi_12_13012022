@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./BarsChart.css"
 
 export default function BarsChart({activity}) {
-  // set svg ref and dimensions
+  // set svg reference and dimensions
   const svgRef = useRef(null);
   const svgWidth = 875;
   const svgHeight = 300;
@@ -20,8 +20,6 @@ export default function BarsChart({activity}) {
     });
     // set chart parameters
     var margin = {top: 30, right: 40, bottom: 30, left: 10};
-    var width = 875;
-    var height = 300;
     var barPadding = .2;
     var rx = 3;
     var ry = 3; 
@@ -35,19 +33,19 @@ export default function BarsChart({activity}) {
     // add group container
     var svg = chart.append("svg")
     .attr("class", "svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // add scales
-    var x0 = d3.scaleBand().range([width - margin.left - margin.right, 0])
+    var x0 = d3.scaleBand().range([svgWidth - margin.left - margin.right, 0])
     .paddingInner(barPadding)
     .paddingOuter(barPadding);
 
     var x1 = d3.scaleBand();
 
-    var y = d3.scaleLinear().range([height - margin.top - margin.bottom, 0]);
+    var y = d3.scaleLinear().range([svgHeight - margin.top - margin.bottom, 0]);
 
     // set Axis
     var xAxis = d3.axisBottom(x0)
@@ -56,7 +54,7 @@ export default function BarsChart({activity}) {
     var yAxis = d3.axisRight(y)
     .tickSize(0)
     .ticks(2)
-    .tickSizeInner(-width + margin.left + margin.right);
+    .tickSizeInner(-svgWidth + margin.left + margin.right);
 
     // mapping axis with data
     x0.domain(newData.map(d=> d.day));
@@ -66,7 +64,7 @@ export default function BarsChart({activity}) {
     // add X Axis
     svg.append("g")
     .attr("class", "bars-x-axis")
-    .attr("transform", "translate(0, "+( height - margin.top - margin.bottom) + ")")
+    .attr("transform", "translate(0, "+( svgHeight - margin.top - margin.bottom) + ")")
     .call(xAxis)
 
     svg.select(".bars-x-axis").selectAll("text")
@@ -79,7 +77,7 @@ export default function BarsChart({activity}) {
     // add Y Axis
     svg.append("g")
     .attr("class", "bars-y-axis")
-    .attr("transform", "translate("+ ( width - margin.left - margin.right)+ ",0)")
+    .attr("transform", "translate("+ ( svgWidth - margin.left - margin.right)+ ",0)")
     .call(yAxis);
 
     svg.select(".bars-y-axis").selectAll("text")
@@ -105,7 +103,7 @@ export default function BarsChart({activity}) {
     .attr("y", "0")
     .attr("x", "-12")
     .attr("width", "40px")
-    .attr("height", height - margin.top - margin.bottom + "px")
+    .attr("height", svgHeight - margin.top - margin.bottom + "px")
     .style("fill","#c4c4c4")
 
     g2.append("rect")
@@ -149,7 +147,7 @@ export default function BarsChart({activity}) {
       a${rx},${ry} 0 0 1 ${rx},${-ry}
       h${5 - 2 * rx}
       a${rx},${ry} 0 0 1 ${rx},${ry}
-      v${height  - margin.top - margin.bottom - y(d.kilogram) - ry}
+      v${svgHeight  - margin.top - margin.bottom - y(d.kilogram) - ry}
       h${-5}Z
     `);
 
@@ -165,7 +163,7 @@ export default function BarsChart({activity}) {
       a${rx},${ry} 0 0 1 ${rx},${-ry}
       h${5 - 2 * rx}
       a${rx},${ry} 0 0 1 ${rx},${ry}
-      v${height  - margin.top - margin.bottom - y(d.calories) - ry}
+      v${svgHeight  - margin.top - margin.bottom - y(d.calories) - ry}
       h${-5}Z
     `);
 

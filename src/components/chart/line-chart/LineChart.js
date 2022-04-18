@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "./LineChart.css"
 
 export default function LineChart({sessions}) {
-  // set svg ref and dimensions
+  // set svg reference and dimensions
   const svgRef = useRef(null);
   const svgWidth = 280;
   const svgHeight = 300;
@@ -26,8 +26,6 @@ export default function LineChart({sessions}) {
 
     // set chart parameters
     var margin = {top: 50, right: 40, bottom: 30, left: 10};
-    var width = 280;
-    var height = 300;
 
     // setup svg wrapper
     var chart = d3.select(svgRef.current)
@@ -38,8 +36,8 @@ export default function LineChart({sessions}) {
     // add group container
     var svg = chart.append("svg")
     .attr("class", "svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .append("g");
 
     // add red background
@@ -47,12 +45,12 @@ export default function LineChart({sessions}) {
     .attr("y", "0")
     .attr("x", "0")
     .attr("rx", 10)
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .attr("fill", "red")
 
     // add scales
-    var x = d3.scaleBand().range([0, width + margin.top + margin.right]);
+    var x = d3.scaleBand().range([0, svgWidth + margin.top + margin.right]);
     var y = d3.scaleLinear().range([90 , 0]);
 
     // set Axis
@@ -74,7 +72,7 @@ export default function LineChart({sessions}) {
     // add Axis
     svg.append("g")
     .attr("class", "line-x-axis")
-    .attr("transform", "translate(-45, "+ (height- margin.top) + ")")
+    .attr("transform", "translate(-45, "+ (svgHeight- margin.top) + ")")
     .call(xAxis);
 
     svg.select(".line-x-axis").selectAll("text")
@@ -109,7 +107,7 @@ export default function LineChart({sessions}) {
 
     var hoverRect = hover.append("rect")
     .attr("class", "hover")
-    .attr("height", height)
+    .attr("height", svgHeight)
     .style("fill", "e60000")
 
     // create tooltip group
@@ -153,8 +151,8 @@ export default function LineChart({sessions}) {
     // create mouse event 
     svg.append("rect")
     .attr("class", "overlay")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
     .on("mouseover", function() { 
       tooltip.style("display", null);
       hover.style("display", null);
@@ -179,7 +177,7 @@ export default function LineChart({sessions}) {
 
       tooltip.attr("transform", "translate(" + x(d.day) + "," + y(d.sessionLength) + ")");
       hover.attr("transform", "translate(" + (x(d.day)-25) + ",0)");
-      hoverRect.attr("width", width-yPos);
+      hoverRect.attr("width", svgWidth-yPos);
 
       d3.select('#tooltip-time')
       .text(d.sessionLength + "min");

@@ -1,10 +1,11 @@
+/* eslint-disable no-loop-func */
 import * as d3 from "d3";
 import { React, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import "./RadarChart.css"
 
 export default function RadarChart({perf}) {
-  // set svg ref and dimensions
+  // set svg reference and dimensions
   const svgRef = useRef(null);
   const svgWidth = 280;
   const svgHeight = 300;
@@ -68,17 +69,6 @@ export default function RadarChart({perf}) {
         .append("g")
         .attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
 
-        function getLineXPosition(d, lf, i, x) {
-          var res = lf*(1-cfg.factor*Math.sin(x*cfg.radians/total))
-          return res
-        }  
-        
-        function getLineYPosition(d, lf, i, x) {
-          var res = lf*(1-cfg.factor*Math.cos(x*cfg.radians/total))
-          console.log(res)
-          return res
-        }
-
         // add circular segments
         for(var s=0; s<cfg.levels; s++){
           var levelFactor = cfg.factor*radius*((s+1)/cfg.levels);
@@ -94,11 +84,6 @@ export default function RadarChart({perf}) {
           .style("stroke", "white")
           .style("stroke-width", "1px")
           .attr("transform", "translate(" + (cfg.w/2-levelFactor) + ", " + (cfg.h/2-levelFactor) + ")");
-
-          // .attr("x1", getLineXPosition(allAxis, s, levelFactor, s))
-          // .attr("y1", getLineYPosition(allAxis, s, levelFactor, s))
-          // .attr("x2", getLineXPosition(allAxis, s, levelFactor, (s+1)))
-          // .attr("y2", getLineYPosition(allAxis, s, levelFactor, (s+1)))
         }
 
         // add axis
