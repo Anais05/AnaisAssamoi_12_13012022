@@ -23,7 +23,7 @@
 - The `yarn dev` command will allow you to run the micro API.
 - Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### 1 Application
+### 2 Application
 
 - Fork this repository https://github.com/Anais05/AnaisAssamoi_12_13012022.git
 - Clone it on your computer.
